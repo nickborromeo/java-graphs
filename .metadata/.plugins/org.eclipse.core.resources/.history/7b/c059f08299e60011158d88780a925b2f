@@ -1,0 +1,35 @@
+//Nicholas Borromeo && Lance Philip Gochuico
+//Directed Weighted Graph
+//March 6, 2007
+
+import java.io.*;
+import java.util.*;
+
+public class WeightedEdge extends Edge{
+	
+	protected int weight;
+	
+	public WeightedEdge(){
+		super();
+		weight = 0;
+		
+	}
+	public WeightedEdge(Vertex x,Vertex y,int w)
+	{
+		super(x,y);
+		weight=w;
+	}
+	
+	public int getWeight(){
+		return weight;
+	}
+	
+	public String toString()
+	{
+		return (super.getV1().el+" -> "+ super.getV2().el + ", weight = "+weight);
+	}
+
+}//end - class
+
+	
+	

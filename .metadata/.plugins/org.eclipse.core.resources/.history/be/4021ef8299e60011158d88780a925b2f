@@ -1,0 +1,45 @@
+//Nicholas Borromeo && Lance Philip Gochuico
+//Directed Weighted Graph
+//March 6, 2007
+
+import java.io.*;
+import java.util.*;
+
+public class DirectedWeightedGraph extends WeightedGraph{
+	
+	WeightedEdge edge;
+	
+	public DirectedWeightedGraph(){
+		super();
+	}
+	
+	public void addEdge(Edge e, int weight) {
+    	
+    	incrementEdges();
+    	matrix[e.getV1().el] [e.getV2().el] = weight;
+    	
+    }
+    
+    public Vector edgeList(){
+    	Vector theList = new Vector();
+    	
+    	for(int i=0; i<matrix.length; i++){
+    		for(int j=0; j<matrix.length; j++)
+    			if(matrix[i][j] != Integer.MAX_VALUE)
+    				theList.addElement(new WeightedEdge(new Vertex(i),new Vertex(j),matrix[i][j]));
+    	}
+    	
+    	return theList;
+    }
+    
+    public void displayEdges(Vector list){
+    	
+    	for(int i=0; i<list.size(); i++)
+    		System.out.println(list.elementAt(i));
+    }
+    
+
+}//end - class
+
+	
+	
