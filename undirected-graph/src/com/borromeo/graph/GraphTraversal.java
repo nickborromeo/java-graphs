@@ -1,0 +1,119 @@
+/*
+ * This class extends the base Graph class that will allow the traversal of the Graph
+ */
+
+package com.borromeo.graph;
+
+import java.util.Vector;
+import com.borromeo.vertex.Vertex;
+import com.borromeo.edge.Edge;
+import com.borromeo.queue.Queue;
+
+public class GraphTraversal extends Graph {
+	
+	int[] visited;	 //for visited vertices in traversal 	
+	
+	public GraphTraversal() {
+    	matrix = new int[MAX] [MAX];	
+    	vertices = edges = 0;
+    }
+ 
+    public GraphTraversal(int x) {
+    	matrix = new int[x+1] [x+1];
+    	vertices = edges = 0;	
+    }
+	
+	// get the list of vertices
+    public Vector getVertexList() {
+    	
+    	Vector list = new Vector();
+    	for(int i=0; i<matrix.length;i++ ) {
+    		for(int j=0; j<matrix.length; j++) 
+    			if (matrix[i][j] == 1) {
+    				list.add(new Vertex(i));
+    				break;
+    			}
+    	}
+    	return list;
+    }
+    
+     // get the list of edges
+    
+    public Vector getEdgeList() {
+    	
+    	Vector list = new Vector();
+    	for(int i=0; i<matrix.length;i++ ) {
+    		for(int j=0; j<matrix.length; j++) 
+    			if (matrix[i][j] == 1) {
+    				Vertex v1 = new Vertex(i);
+    				Vertex v2 = new Vertex(j);
+    				list.add(new Edge(v1,v2));
+    			}
+    	}
+    	return list;
+    }
+    
+
+    int i=0;
+
+    public void visit(Edge e) {
+    	System.out.println(e);
+    }
+    
+    public void visit(Vertex v) {
+    	System.out.println(v);
+    }
+    
+   
+    public void DFS(int u) {
+    	visited[u] = ++i;
+    	for (int i=0; i<matrix.length; i++)
+    		if(matrix[u][i] == 1) 
+    			if(visited[i]==0) {
+    				Vertex v1 = new Vertex(u);
+    				Vertex v2 = new Vertex(i);
+    				Edge e = new Edge(v1,v2);
+    				visit(e);
+    				DFS(i);
+    			}
+    								
+    }
+    
+    public void depthFirstSearch() {
+		while (visited[i]== 0) 
+			DFS(i);	   
+    	
+    }
+    
+    public void breadthFirstSearch() {
+        Queue queue = new Queue();
+        
+        while(visited[i] == 0) {
+    			
+    			queue.enqueue(new Vertex(i));
+    			visited[i] = ++i;
+    			while (!queue.isEmpty()) {
+    				Vertex v = (Vertex) queue.dequeue();
+    				for (int j=0; j<matrix.length; j++) {
+    				
+    					if(matrix[v.el][j] == 1)
+    						if(visited[j]==0) {
+    							Vertex v2 = new Vertex(j);
+    							queue.enqueue(v2);
+    							Edge e = new Edge(v,v2);
+    							visit(e);
+    							visited[j]= i++;
+    						}
+    				}
+        		}
+        }
+    }
+    
+    public void displayEdges(Vector edges) {
+    	
+    	for(int i=0; i<edges.size(); i++)
+    		System.out.println((Edge) edges.elementAt(i));
+    	
+    	
+    }
+}

@@ -5,7 +5,6 @@
 package com.borromeo.graph;
 import com.borromeo.edge.Edge;
 
-
 public class Graph {
 	
 	public final int MAX = 100;
